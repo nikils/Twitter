@@ -18,7 +18,7 @@
 + (void)loadTimeline:(NSString *)user withCallback:(void (^)(NSArray *, NSError *)) completion;
 + (void)loadMentions:(void (^)(NSArray *, NSError *)) completion;
 + (void)loadProfile:(NSString *)user withCallback:(void (^)(NSDictionary *, NSError *)) completion;
-+ (void)doTweet:(NSString *)tweet withCallback:(void (^)(NSDictionary *, NSError *)) completion;
++ (void)doTweet:(NSString *)tweet forReply:(NSString *)tweetId withCallback:(void (^)(NSDictionary *, NSError *)) completion;
 + (void)doRetweet:(NSString *)tweetId withCallback:(void (^)(NSDictionary *, NSError *)) completion;
 + (void)doLike:(NSString *)tweetId withCallback:(void (^)(NSDictionary *, NSError *)) completion;
 + (NSString *)getRelativeDate:(NSString *)date;

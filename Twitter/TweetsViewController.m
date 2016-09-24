@@ -7,6 +7,7 @@
 //
 
 #import "TweetsViewController.h"
+#import "ComposeViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "TwitterClient.h"
 #import "TweetCell.h"
@@ -65,8 +66,14 @@
 
     NSDictionary *tweetUser = self.tweets[indexPath.row][@"user"];
     NSDictionary *tweet = self.tweets[indexPath.row];
+    NSNumber *favoriteCount = tweet[@"favorite_count"];
     if ([tweet valueForKey:@"retweeted_status"] != nil) {
         tweetUser = tweet[@"retweeted_status"][@"user"];
+        favoriteCount = tweet[@"retweeted_status"][@"favorite_count"];
+    }
+    
+    if (indexPath.row == 0) {
+        //NSLog(@"tweet %@", tweet);
     }
 
     cell.userNameLabel.text = tweetUser[@"name"];
@@ -76,6 +83,12 @@
     cell.tweetLabel.text = tweet[@"text"];
     cell.tweetTimeLabel.text = [TwitterClient getRelativeDate:tweet[@"created_at"]];
     NSNumber *retweeted = tweet[@"retweeted"];
+    if (!cell.replyIcon.gestureRecognizers) {
+        UITapGestureRecognizer *replyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(replyTap:)];
+        replyTap.numberOfTapsRequired = 1;
+        cell.replyIcon.userInteractionEnabled = YES;
+        [cell.replyIcon addGestureRecognizer:replyTap];
+    }
     if (retweeted.boolValue) {
         cell.retweetIcon.image = [UIImage imageNamed:@"retweet-on"];
     } else {
@@ -100,6 +113,7 @@
         [cell.likeIcon addGestureRecognizer:likeTap];
     }
     cell.retweetCountLabel.text = [TwitterClient getReadableNumber:tweet[@"retweet_count"]];
+    cell.likeCountLabel.text = [TwitterClient getReadableNumber:favoriteCount];
     [cell.profilePic setImageWithURL:[NSURL URLWithString:tweetUser[@"profile_image_url_https"]]];
     if (!cell.profilePic.gestureRecognizers) {
         UITapGestureRecognizer *profileTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showProfile:)];
@@ -161,6 +175,20 @@
     [self.hmbController showProfile:tweetUser[@"screen_name"]];
 }
 
+- (void)replyTap:(UITapGestureRecognizer *)gesture {
+    TweetCell *cell = (TweetCell *)gesture.view.superview.superview;
+    NSIndexPath *indexPath = [self.tweetTableView indexPathForCell:cell];
+    NSDictionary *tweet = self.tweets[indexPath.row];
+    NSString *tweetId = tweet[@"id_str"];
+    if ([tweet valueForKey:@"retweeted_status"] != nil) {
+        tweetId = tweet[@"retweeted_status"][@"id_str"];
+    }
+    UIStoryboard *mainStory = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ComposeViewController *compose = (ComposeViewController*)[mainStory instantiateViewControllerWithIdentifier:@"ComposeViewController"];
+    compose.replyTweet = tweetId;
+    [self.navigationController pushViewController:compose animated:YES];
+}
+
 - (void)retweetTap:(UITapGestureRecognizer *)gesture {
     TweetCell *cell = (TweetCell *)gesture.view.superview.superview;
     NSIndexPath *indexPath = [self.tweetTableView indexPathForCell:cell];
@@ -178,9 +206,14 @@
 - (void)favoriteTap:(UITapGestureRecognizer *)gesture {
     TweetCell *cell = (TweetCell *)gesture.view.superview.superview;
     NSIndexPath *indexPath = [self.tweetTableView indexPathForCell:cell];
+    NSNumber *favoriteCount = self.tweets[indexPath.row][@"favorite_count"];
+    if ([self.tweets[indexPath.row] valueForKey:@"retweeted_status"] != nil) {
+        favoriteCount = self.tweets[indexPath.row][@"retweeted_status"][@"favorite_count"];
+    }
     [TwitterClient doLike:self.tweets[indexPath.row][@"id_str"] withCallback:^(NSDictionary *response, NSError *error) {
         if (!error) {
             cell.likeIcon.image = [UIImage imageNamed:@"like-on"];
+            cell.likeCountLabel.text = [TwitterClient getReadableNumber:[NSNumber numberWithLong:favoriteCount.integerValue+1]];
         }
         //NSLog(@"response %@", response);
     }];

@@ -141,12 +141,15 @@ static BDBOAuth1SessionManager *networkManager;
 
 }
 
-+ (void)doTweet:(NSString *)tweet withCallback:(void (^)(NSDictionary *, NSError *)) completion {
++ (void)doTweet:(NSString *)tweet forReply:(NSString *)tweetId withCallback:(void (^)(NSDictionary *, NSError *)) completion {
     if (!networkManager) {
         [TwitterClient initNetworkManager];
     }
     
     NSString *url = [NSString stringWithFormat:@"1.1/statuses/update.json?status=%@", [tweet stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+    if (tweetId) {
+        url = [NSString stringWithFormat:@"1.1/statuses/update.json?status=%@&in_reply_to_status_id=%@", [tweet stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]], [tweetId stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+    }
     [networkManager POST:url parameters:nil progress:nil success:^(NSURLSessionDataTask * task, id responseObject) {
         if (![responseObject isKindOfClass:[NSDictionary class]]) {
             NSError *error = [NSError errorWithDomain:@"TweetError" code:1002 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Unexpected response received from Twitter API.", nil)}];

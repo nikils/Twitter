@@ -53,7 +53,7 @@
 }
 - (IBAction)onTweetButtonTap:(UIButton *)sender {
     [self.tweetTextView resignFirstResponder];
-    [TwitterClient doTweet:self.tweetTextView.text withCallback:^(NSDictionary *resp, NSError *error) {
+    [TwitterClient doTweet:self.tweetTextView.text forReply:self.replyTweet withCallback:^(NSDictionary *resp, NSError *error) {
         if (!error) {
             [self.navigationController popViewControllerAnimated:YES];
         }

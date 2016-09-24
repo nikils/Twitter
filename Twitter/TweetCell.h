@@ -17,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *retweetIcon;
 @property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *likeIcon;
+@property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *replyIcon;
 
 @end

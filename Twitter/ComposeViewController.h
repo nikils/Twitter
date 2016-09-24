@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ComposeViewController : UIViewController
+@property (strong, nonatomic) NSString *replyTweet;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userIdLabel;

@@ -95,12 +95,19 @@
                                                         <constraint firstAttribute="width" constant="20" id="lJJ-dL-otU"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySR-st-0QP">
+                                                    <rect key="frame" x="176" y="107" width="31" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="iOs-RR-ZBI" secondAttribute="bottom" constant="8" id="1YA-rP-Mjn"/>
                                                 <constraint firstItem="3RL-kq-sr5" firstAttribute="top" secondItem="fPO-Cr-UAL" secondAttribute="top" constant="10" id="2Jj-pp-I7w"/>
                                                 <constraint firstItem="QXo-2k-4DW" firstAttribute="top" secondItem="fPO-Cr-UAL" secondAttribute="topMargin" constant="2" id="2cz-1Q-3eF"/>
                                                 <constraint firstItem="mNL-SN-iJW" firstAttribute="leading" secondItem="iOs-RR-ZBI" secondAttribute="trailing" constant="20" id="8tV-7P-K2n"/>
+                                                <constraint firstItem="ySR-st-0QP" firstAttribute="leading" secondItem="and-O4-WkN" secondAttribute="trailing" constant="4" id="93O-4s-4Fm"/>
                                                 <constraint firstAttribute="trailing" secondItem="JHa-aW-QTD" secondAttribute="trailing" constant="10" id="9mi-pY-wpR"/>
                                                 <constraint firstItem="JHa-aW-QTD" firstAttribute="trailing" secondItem="WmW-Gp-pCr" secondAttribute="trailing" id="Ejc-nm-EDE"/>
                                                 <constraint firstItem="3RL-kq-sr5" firstAttribute="leading" secondItem="fPO-Cr-UAL" secondAttribute="leading" constant="10" id="F39-Cb-s1f"/>
@@ -108,6 +115,7 @@
                                                 <constraint firstItem="WmW-Gp-pCr" firstAttribute="top" secondItem="QXo-2k-4DW" secondAttribute="bottom" constant="8" id="Ify-cG-sTL"/>
                                                 <constraint firstItem="iOs-RR-ZBI" firstAttribute="leading" secondItem="WmW-Gp-pCr" secondAttribute="leading" id="JmR-Au-ksW"/>
                                                 <constraint firstItem="QXo-2k-4DW" firstAttribute="leading" secondItem="3RL-kq-sr5" secondAttribute="trailing" constant="10" id="P7G-Ea-QTP"/>
+                                                <constraint firstItem="ySR-st-0QP" firstAttribute="top" secondItem="6JH-BG-wGQ" secondAttribute="top" id="aP8-oC-dwP"/>
                                                 <constraint firstItem="WmW-Gp-pCr" firstAttribute="leading" secondItem="QXo-2k-4DW" secondAttribute="leading" id="fS7-GN-L9D"/>
                                                 <constraint firstItem="iOs-RR-ZBI" firstAttribute="top" secondItem="WmW-Gp-pCr" secondAttribute="bottom" constant="10" id="hYB-5u-i62"/>
                                                 <constraint firstItem="iOs-RR-ZBI" firstAttribute="top" secondItem="mNL-SN-iJW" secondAttribute="top" id="hqx-hY-evb"/>
@@ -121,8 +129,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="likeCountLabel" destination="ySR-st-0QP" id="B6p-xF-j8A"/>
                                             <outlet property="likeIcon" destination="and-O4-WkN" id="nAd-ET-3s4"/>
                                             <outlet property="profilePic" destination="3RL-kq-sr5" id="nrr-96-uEh"/>
+                                            <outlet property="replyIcon" destination="iOs-RR-ZBI" id="W91-sd-8cN"/>
                                             <outlet property="retweetCountLabel" destination="6JH-BG-wGQ" id="UTj-a3-75o"/>
                                             <outlet property="retweetIcon" destination="mNL-SN-iJW" id="RW5-Iq-76M"/>
                                             <outlet property="tweetLabel" destination="WmW-Gp-pCr" id="1Hb-f6-bV4"/>
@@ -463,7 +473,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qs0-zu-khf" userLabel="Tweet">
-                                                    <rect key="frame" x="68" y="35.5" width="242" height="172"/>
+                                                    <rect key="frame" x="68" y="35" width="242" height="172"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -514,6 +524,12 @@
                                                         <constraint firstAttribute="height" constant="22" id="fyp-Xn-kjk"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hB7-Et-r4t">
+                                                    <rect key="frame" x="213" y="221" width="31" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="W4v-b9-pBp" firstAttribute="leading" secondItem="Qs0-zu-khf" secondAttribute="leading" id="44e-hG-9QC"/>
@@ -531,6 +547,8 @@
                                                 <constraint firstItem="Qgf-CK-2Ig" firstAttribute="top" secondItem="ee2-e2-de7" secondAttribute="top" constant="4" id="eWq-Mo-jiI"/>
                                                 <constraint firstItem="Qs0-zu-khf" firstAttribute="leading" secondItem="caM-Pc-K8U" secondAttribute="leading" id="eja-ce-gFd"/>
                                                 <constraint firstItem="Qgf-CK-2Ig" firstAttribute="leading" secondItem="ee2-e2-de7" secondAttribute="trailing" constant="4" id="emJ-fk-g4D"/>
+                                                <constraint firstItem="hB7-Et-r4t" firstAttribute="leading" secondItem="VnE-Gg-bwO" secondAttribute="trailing" constant="4" id="hEB-hc-QKY"/>
+                                                <constraint firstItem="hB7-Et-r4t" firstAttribute="top" secondItem="Qgf-CK-2Ig" secondAttribute="top" id="njK-CT-sxp"/>
                                                 <constraint firstItem="BWA-aQ-Pgz" firstAttribute="centerY" secondItem="TGR-Yv-esp" secondAttribute="centerY" id="oZh-XZ-wPr"/>
                                                 <constraint firstItem="ee2-e2-de7" firstAttribute="top" secondItem="W4v-b9-pBp" secondAttribute="top" id="pPE-cu-J2E"/>
                                                 <constraint firstAttribute="bottom" secondItem="W4v-b9-pBp" secondAttribute="bottom" constant="10" id="rFs-7g-O0s"/>
@@ -540,9 +558,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="likeCountLabel" destination="hB7-Et-r4t" id="6Yf-9h-MT5"/>
                                             <outlet property="likeIcon" destination="VnE-Gg-bwO" id="yz2-Ud-axr"/>
                                             <outlet property="profilePic" destination="bqw-j5-D9r" id="IqQ-W4-X2p"/>
-                                            <outlet property="replyIcon" destination="W4v-b9-pBp" id="rRd-tg-fqT"/>
+                                            <outlet property="replyIcon" destination="W4v-b9-pBp" id="07b-f0-6hf"/>
                                             <outlet property="retweetCountLabel" destination="Qgf-CK-2Ig" id="XwU-Jx-GIr"/>
                                             <outlet property="retweetIcon" destination="ee2-e2-de7" id="pTZ-uY-pN2"/>
                                             <outlet property="tweetLabel" destination="Qs0-zu-khf" id="M0j-cC-2L7"/>
@@ -650,7 +669,7 @@
         <!--Compose View Controller-->
         <scene sceneID="30m-Aj-20X">
             <objects>
-                <viewController id="lQf-zt-EXu" customClass="ComposeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ComposeViewController" id="lQf-zt-EXu" customClass="ComposeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="reL-n8-yQE"/>
                         <viewControllerLayoutGuide type="bottom" id="uOD-Aq-QgE"/>
