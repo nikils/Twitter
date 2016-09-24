@@ -13,6 +13,7 @@
 #import "ProfTweetCell.h"
 
 @interface ProfileViewController() <UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSDictionary *profile;
 @property (strong, nonatomic) NSArray *tweets;
 @end
@@ -23,11 +24,19 @@
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 120;
+    self.refreshControl = [[UIRefreshControl alloc] initWithFrame:self.refreshControl.bounds];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     NSLog(@"view controllers %lu", self.navigationController.viewControllers.count);
     [self loadProfile];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self loadTweets];
+}
+- (void)refreshData {
+    [self loadProfile];
     [self loadTweets];
 }
 - (void)loadProfile {
@@ -53,6 +62,7 @@
 }
 - (void)loadTweets {
     [TwitterClient loadTimeline:self.user withCallback:^(NSArray *response, NSError *error) {
+        [self.refreshControl endRefreshing];
         if (error) {
             NSLog(@"error loading tweets %@", error.localizedDescription);
             self.tweets = @[];

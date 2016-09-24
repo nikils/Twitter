@@ -12,6 +12,7 @@
 #import "TweetCell.h"
 
 @interface TweetsViewController () <UITableViewDelegate, UITableViewDataSource, MenuSelectDelegate>
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *errorMsg;
 @property (strong, nonatomic) NSArray *tweets;
 @property (weak, nonatomic) IBOutlet UITableView *tweetTableView;
@@ -24,10 +25,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.refreshControl = [[UIRefreshControl alloc] initWithFrame:self.refreshControl.bounds];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     self.tweetTableView.delegate = self;
     self.tweetTableView.dataSource = self;
     self.tweetTableView.rowHeight = UITableViewAutomaticDimension;
     self.tweetTableView.estimatedRowHeight = 120;
+    [self.tweetTableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged];
     self.hmbController.menuSelectDelegate = self;
     if ([TwitterClient isAuthorized]) {
         [self.tweetsLeftButton setTitle:@"Sign Out" forState:UIControlStateNormal];
@@ -123,6 +128,7 @@
 - (void)loadTweets {
     self.errorMsg = nil;
     [TwitterClient loadTimeline:nil withCallback:^(NSArray *response, NSError *error) {
+        [self.refreshControl endRefreshing];
         if (error) {
             NSLog(@"error loading tweets %@", error.localizedDescription);
             self.errorMsg = @"Network error";
@@ -134,6 +140,7 @@
 }
 - (void)loadMentions {
     [TwitterClient loadMentions:^(NSArray *response, NSError *error) {
+        [self.refreshControl endRefreshing];
         if (error) {
             NSLog(@"error loading tweets %@", error.localizedDescription);
             self.errorMsg = @"Network error";
