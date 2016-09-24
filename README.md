@@ -18,7 +18,7 @@ The following **required** functionality is completed:
    - [x] Dragging anywhere in the view should reveal the menu.
    - [x] The menu should include links to your profile, the home timeline, and the mentions view.
 - [x] Profile page
-   - [ ] Contains the user header view (implemented as a custom view)
+   - [x] Contains the user header view (implemented as a custom view)
    - [x] Contains a section with the users basic stats: # tweets, # following, # followers
 - [x] Home Timeline
    - [x] Tapping on a user image should bring up that user's profile page
@@ -46,7 +46,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/L8dA4Qe.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
